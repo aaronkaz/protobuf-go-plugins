@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package kazweb.annotations;
+
+import "google/protobuf/descriptor.proto";
+
+// Extend service method-level options
+// Example usage:
+// service SomeService {
+//   rpc DoSomething(Request) returns (Response) {
+//       option (dop.annotations.v1.abstract) = true;
+//   }
+// }
+extend google.protobuf.MethodOptions {
+  // Declares a service method as abstract.  Use this to annotate service methods
+  // that can be consumed as Functional (or Single-Abstract-Method [SAM]) Interfaces
+  bool abstract = 200000001;
+}

@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package kazweb.annotations;
+
+import "google/protobuf/descriptor.proto";
+
+extend google.protobuf.EnumValueOptions {
+  // Desc defines a human-friendly string description of the enum value
+  optional string desc = 200000002;
+}

@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package kazweb.annotations;
+
+import "google/protobuf/descriptor.proto";
+
+// Extend service-level options
+// Example usage:
+// service SomeService {
+//   option (dop.annotations.v1.lambda_service).is_proxy = false;
+//   rpc DoSomething(Request) returns (Response) {}
+// }
+extend google.protobuf.ServiceOptions {
+  // Declares service as a lambda service
+  LambdaAnnotation lambda_service = 200000000;
+}
+
+message LambdaAnnotation {
+  // specify if Lambda is proxy type.  If not, there should only be 1 method per service
+  bool is_proxy = 1;
+}
