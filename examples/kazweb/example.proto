@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package kazweb;
+
+import "kazweb/annotations/abstract.proto";
+import "kazweb/annotations/enum.proto";
+
+service SampleService {
+    rpc Echo(EchoRequest) returns (EchoResponse) {
+        option (kazweb.annotations.abstract) = true;
+    };
+}
+
+enum Enum {
+    OPTION_A = 0 [
+        (kazweb.annotations.desc) = "Plan A"
+    ];
+    OPTION_B = 1 [
+        (kazweb.annotations.desc) = "Plan B"
+    ];
+}
+
+message EchoRequest {
+    string message = 1;
+}
+
+message EchoResponse {
+    string message = 1;
+}
+

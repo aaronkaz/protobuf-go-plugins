@@ -8,7 +8,7 @@ import "google/protobuf/descriptor.proto";
 // Example usage:
 // service SomeService {
 //   rpc DoSomething(Request) returns (Response) {
-//       option (dop.annotations.v1.abstract) = true;
+//       option (kazweb.annotations.abstract) = true;
 //   }
 // }
 extend google.protobuf.MethodOptions {

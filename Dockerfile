@@ -1,11 +1,12 @@
 # syntax=docker/dockerfile:1.4
 FROM golang:1.21-bullseye AS builder
+ARG cmd
 WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod download
 COPY . ./
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
-    go build -ldflags "-s -w" cmd/protoc-gen-enum-desc-go/main.go -o /go/bin/protoc-gen-enum-desc-go
+    go build -o /go/bin/protoc-plugin plugins/${cmd}/main.go 
 
 # When building a Docker image on a host that does not match linux/amd64 (such as an M1),
 # go install will put the binary in $GOPATH/bin/$GOOS_$GOARCH/. The mv command copies
@@ -16,4 +17,4 @@ FROM scratch
 COPY --from=builder --link /etc/passwd /etc/passwd
 COPY --from=builder /go/bin/ /
 USER nobody
-ENTRYPOINT [ "/protoc-gen-enum-desc-go" ]
+ENTRYPOINT [ "/protoc-plugin" ]
